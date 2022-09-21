@@ -56,8 +56,26 @@
             interim_span.innerHTML = interim;
             if(final.length != 0){
                 send_message(final)
+                const say = final+"んですねred?"
+                console.log(say)
+                const uttr = new SpeechSynthesisUtterance(say)
+                speechSynthesis.speak(uttr)
             }
    
+        }
+
+        const palexa = () =>{
+            console.log("this is palexa");
+            const param = new SpeechSynthesisUtterance(); 
+ 
+            // param.text = elem.text;
+            param.text = "今日なにしたのred?"; //読み上げる文章 
+            // param.lang = "jp-JP"; 
+            param.rate = 1; //速度 0~2
+            param.pitch = 1; //声の高さ 0~2
+            param.volume = 1; //音量0~1
+
+            speechSynthesis.speak(param) 
         }
 
         const send_message = async (text) => {
@@ -80,6 +98,11 @@
                 recognition.stop();
                 reset();
             } else {
+                // palexa();
+                console.log("say!")
+                const uttr = new SpeechSynthesisUtterance("今日なにしたのred?")
+                // 発言を再生 (発言キューに発言を追加)
+                speechSynthesis.speak(uttr)
                 recognition.start();
                 recognizing = true;
                 button.innerHTML = "Click to Stop";
